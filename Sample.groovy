@@ -8,7 +8,7 @@ organizationFolder('Test-Jobs') {
     }
     organizations {
 	
-		github( 'msharathraj/SampleTest',  'https', = 'github.com')
+		github( 'msharathraj/SampleTest',  'https',  'github.com')
     }
 	
     configure { node ->
