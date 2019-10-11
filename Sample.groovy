@@ -19,7 +19,7 @@ organizationFolder('Canary-Containers') {
           }
         }
     }
-	
+	// test
     configure { node ->
         // node represents <jenkins.branch.OrganizationFolder>
         def traits = node / 'navigators' / 'com.cloudbees.jenkins.plugins.bitbucket.BitbucketSCMNavigator' / 'traits'
