@@ -8,17 +8,13 @@ organizationFolder('Test-Jobs') {
     }
     organizations {
 	
-		scm {
+		branchSources {
         git {
-          remote {
-			url('https://github.com/msharathraj/Maven-Test.git')
-            branch("develop")
-            extensions {
-                localBranch('master')
-            }
-          }
+            //id('12121212') // IMPORTANT: use a constant and unique identifier
+            remote('https://github.com/msharathraj/SampleTest.git')
+            
         }
-    }
+		}
     }
 	
     configure { node ->
