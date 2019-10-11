@@ -11,6 +11,7 @@ organizationFolder('Canary-Containers') {
 		git {
           remote {
 			url('https://github.com/msharathraj/Maven-Test.git')
+			repoOwner('Maven-Test')
             branch("develop")
             extensions {
                 localBranch('develop')
