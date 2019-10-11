@@ -9,13 +9,9 @@ organizationFolder('Test-Jobs') {
     organizations {
 	
 		github {
-          remote {
-			repository('https://github.com/msharathraj/Maven-Test.git')
+          repository('https://github.com/msharathraj/Maven-Test.git')
 			repoOwner('Maven-Test')
-            extensions {
-                localBranch('develop')
-            }
-          }
+            
         }
     }
 	
