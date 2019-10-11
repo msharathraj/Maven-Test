@@ -8,7 +8,7 @@ organizationFolder('Test-Jobs') {
     }
     organizations {
 	
-		git {
+		github {
           remote {
 			url('https://github.com/msharathraj/Maven-Test.git')
 			repoOwner('Maven-Test')
