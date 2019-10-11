@@ -8,13 +8,7 @@ organizationFolder('Test-Jobs') {
     }
     organizations {
 	
-		branchSources {
-        git {
-            //id('12121212') // IMPORTANT: use a constant and unique identifier
-            remote('https://github.com/msharathraj/SampleTest.git')
-            
-        }
-		}
+		github( 'msharathraj/SampleTest',  'https', = 'github.com')
     }
 	
     configure { node ->
