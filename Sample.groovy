@@ -51,7 +51,7 @@ multibranchPipelineJob("Test") {
         }
       }
     }
-    // discover Branches (workaround due to JENKINS-46202)
+    // discover Branches (workaround due to JENKINS-46202) -
     configure {
       def traits = it / sources / data / 'jenkins.branch.BranchSource' / source / traits
       traits << 'com.cloudbees.jenkins.plugins.bitbucket.BranchDiscoveryTrait' {
