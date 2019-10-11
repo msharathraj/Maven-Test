@@ -1,6 +1,6 @@
 gitCreds = 'git'
 
-listView('Git-Flow-Jobs') {
+listView('Git-Flow-Jobs-multi') {
 	description("All Git Flow Jobs.")
     filterBuildQueue(true)
     filterExecutors(true)
