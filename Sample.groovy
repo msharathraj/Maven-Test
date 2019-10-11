@@ -8,11 +8,17 @@ organizationFolder('Test-Jobs') {
     }
     organizations {
 	
-		github {
-          repository('https://github.com/msharathraj/Maven-Test.git')
-			repoOwner('Maven-Test')
-            
+		scm {
+        git {
+          remote {
+			url('https://github.com/msharathraj/Maven-Test.git')
+            branch("develop")
+            extensions {
+                localBranch('master')
+            }
+          }
         }
+    }
     }
 	
     configure { node ->
