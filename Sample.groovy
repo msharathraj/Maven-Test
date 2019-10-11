@@ -28,7 +28,7 @@ multibranchPipelineJob("Test") {
             //credentialsId("top-secret-1234-some-guid")
             //repoOwner("${bitbucket_project.toUpperCase()}")
             //repository("${bitbucket_repo}")
-            serverUrl("https://github.com/msharathraj/Maven-Test.git")
+            remote("https://github.com/msharathraj/Maven-Test.git")
             traits {
               headWildcardFilter {
                 includes("master release/* feature/* bugfix/*")
