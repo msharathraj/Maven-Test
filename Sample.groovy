@@ -1,4 +1,4 @@
-def file = readFile('pom.xml')
+def file = readFileFromWorkspace('pom.xml')
 job("Merge-Release-Git") {
      scm {
         git {
