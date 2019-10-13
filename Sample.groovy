@@ -1,4 +1,3 @@
-def file = readFileFromWorkspace('pom.xml')
 job("Merge-Release-Git") {
      scm {
         git {
@@ -28,5 +27,5 @@ job("Merge-Release-Git") {
 }
 def getReleasedVersion() {
 	
-    return (file =~ '<version>(.+)-SNAPSHOT</version>')[0][1]
+    return (readFileFromWorkspace('pom.xml') =~ '<version>(.+)-SNAPSHOT</version>')[0][1]
 }
