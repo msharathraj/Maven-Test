@@ -9,7 +9,7 @@ job("Merge-Release-Git") {
         git {
           remote {
 			url('https://github.com/msharathraj/SampleTest.git')
-            branch(develop)
+            branch('develop')
             extensions {
                 localBranch('develop')
             }
