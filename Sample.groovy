@@ -1,32 +1,61 @@
 job("Merge-Release-Git") {
+	def readFileFromWorkspace('pom.xml')
+	choiceParam('SOURCE_BRANCH', 'Develop', 'Master')
+    choiceParam('DESTINATION_BRANCH', 'Master', 'Release')
+    choiceParam('TAG_REQUIRED', 'Yes', 'No')
      scm {
         git {
           remote {
 			url('https://github.com/msharathraj/SampleTest.git')
-            branch("develop")
+            branch(${SOURCE_BRANCH})
             extensions {
-                localBranch('develop')
+                localBranch(${SOURCE_BRANCH})
             }
           }
         }
     }
     steps {
+		
 		 release =  getReleasedVersion()
 	     batchFile("echo Hello World!  ${release} ")
 	     
 	     batchFile('echo Hello World! ' )
 	     batchFile('git branch')
+		 
+		 if(${TAG_REQUIRED}){
+			batchFile('git tag -a ${release} -m 'New version 1.4' ')
+			batchFile('git push origin ${release}')
+			batchFile('git checkout ${release}')
+			batchFile('git merge master')
+		 }
 	     triggers {
 			bitbucketPush()
 		}
-		 mavenJob('mvn clean install') {
-			postBuildSteps('SUCCESS') {
-				batchFile("echo 'run after Maven'")
-			}
-		}
+		maven {
+            //goals('clean')
+            //goals('verify')
+            properties(skipTests: true)
+            //mavenInstallation('Maven 3.1.1')
+            providedSettings('central-mirror')
+        }
+		resolveArtifacts {
+            failOnError()
+            snapshotUpdatePolicy('always')
+            targetDirectory('lib')
+            artifact {
+                groupId('org.slf4j')
+                artifactId('slf4j-api')
+                version('[1.7.5,1.7.6]')
+            }
+            artifact {
+                groupId('ch.qos.logback')
+                artifactId('logback-classic')
+                version('1.1.1')
+                classifier('sources')
+            }
+        }
 	 }
 }
 def getReleasedVersion() {
-	
-    return (readFileFromWorkspace('pom.xml') =~ '<version>(.+)-SNAPSHOT</version>')[0][1]
+	return (readFileFromWorkspace('pom.xml') =~ '<version>(.+)-SNAPSHOT</version>')[0][1]
 }
