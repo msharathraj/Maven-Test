@@ -1,17 +1,8 @@
-gitCreds = 'git'
-
-organizationFolder('Canary-Containers') {
-    description('This contains branch source jobs for Bitbucket')
-    displayName('Canary Containers')
-    triggers {
-        periodic(86400)
-    }
-    organizations {
-	
-		git {
+job("Merge-Release-Git") {
+     scm {
+        git {
           remote {
-			url('https://github.com/msharathraj/Maven-Test.git')
-			repoOwner('Maven-Test')
+			url('https://github.com/msharathraj/SampleTest.git')
             branch("develop")
             extensions {
                 localBranch('develop')
@@ -19,31 +10,21 @@ organizationFolder('Canary-Containers') {
           }
         }
     }
-	// test
-    configure { node ->
-        // node represents <jenkins.branch.OrganizationFolder>
-        def traits = node / 'navigators' / 'com.cloudbees.jenkins.plugins.bitbucket.BitbucketSCMNavigator' / 'traits'
-        traits << 'com.cloudbees.jenkins.plugins.bitbucket.BranchDiscoveryTrait' {
-            strategyId(3) // detect all branches
-        }
-    }
+    steps {
+		 release =  getReleasedVersion()
+	     batchFile('echo Hello World! ${release}')
+	     batchFile('echo Hello World! ' )
+	     batchFile('git branch')
+	     triggers {
+			bitbucketPush()
+		}
+		 mavenJob('mvn clean install') {
+			postBuildSteps('SUCCESS') {
+				batchFile("echo 'run after Maven'")
+			}
+		}
+	 }
 }
-
-listView('Git-Flow-Jobs') {
-	description("All Git Flow Jobs.")
-    filterBuildQueue(true)
-    filterExecutors(true)
-    jobs {
-        regex('.*-Git')
-    }
-    columns {
-        status()
-     	weather()
-        name()
-        lastSuccess()
-        lastFailure()
-        lastDuration()
-        buildButton()
-    }
+def getReleasedVersion() {
+    return (readFile('pom.xml') =~ '<version>(.+)-SNAPSHOT</version>')[0][1]
 }
-
