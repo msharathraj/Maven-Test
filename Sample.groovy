@@ -23,7 +23,7 @@ job("Merge-Release-Git") {
 	     batchFile('git branch')
 		 
 		 if(${TAG_REQUIRED}){
-			batchFile('git tag -a ${release} -m 'New version 1.4' ')
+			batchFile('git tag -a ${release} -m "New version 1.4" ')
 			batchFile('git push origin ${release}')
 			batchFile('git checkout ${release}')
 			batchFile('git merge master')
