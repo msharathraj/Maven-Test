@@ -1,8 +1,10 @@
 job("Merge-Release-Git") {
 	def pomData =  readFileFromWorkspace('pom.xml')
-	choiceParam('SOURCE_BRANCH', 'Develop', 'Master')
-    choiceParam('DESTINATION_BRANCH', 'Master', 'Release')
-    choiceParam('TAG_REQUIRED', 'Yes', 'No')
+	parameters {
+		choiceParam('SOURCE_BRANCH', 'Develop', 'Master')
+		choiceParam('DESTINATION_BRANCH', 'Master', 'Release')
+		choiceParam('TAG_REQUIRED', 'Yes', 'No')
+	}
      scm {
         git {
           remote {
