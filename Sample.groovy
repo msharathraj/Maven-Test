@@ -1,9 +1,9 @@
 job("Merge-Release-Git") {
 	def pomData =  readFileFromWorkspace('pom.xml')
 	parameters {
-		choiceParam('SOURCE_BRANCH', 'Develop', 'Master')
-		choiceParam('DESTINATION_BRANCH', 'Master', 'Release')
-		choiceParam('TAG_REQUIRED', 'Yes', 'No')
+		choiceParam('SOURCE_BRANCH', ['Develop', 'Master'], 'Source branch from code is merged to Destination')
+		choiceParam('DESTINATION_BRANCH', ['Master', 'Release'], 'Destination branch where the code should be merged')
+		choiceParam('TAG_REQUIRED', ['Yes', 'No'], 'Do you require a tag creation')
 	}
      scm {
         git {
