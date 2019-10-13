@@ -12,7 +12,7 @@ job("Merge-Release-Git") {
     }
     steps {
 		 release =  getReleasedVersion()
-	     batchFile('echo Hello World!'  ${release})
+	     batchFile('echo Hello World!' + ${release})
 	     batchFile('echo Hello World!' + ${release})
 	     batchFile('echo Hello World! ' )
 	     batchFile('git branch')
