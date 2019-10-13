@@ -1,5 +1,5 @@
 job("Merge-Release-Git") {
-	def readFileFromWorkspace('pom.xml')
+	def pomData =  readFileFromWorkspace('pom.xml')
 	choiceParam('SOURCE_BRANCH', 'Develop', 'Master')
     choiceParam('DESTINATION_BRANCH', 'Master', 'Release')
     choiceParam('TAG_REQUIRED', 'Yes', 'No')
