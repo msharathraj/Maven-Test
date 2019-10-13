@@ -38,7 +38,7 @@ job("Merge-Release-Git") {
             //goals('verify')
             properties(skipTests: true)
             //mavenInstallation('Maven 3.1.1')
-            providedSettings('central-mirror')
+            //providedSettings('central-mirror')
         }
 		resolveArtifacts {
             failOnError()
