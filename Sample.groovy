@@ -1,8 +1,8 @@
 job("Test-Var"){
-	call("test", "test1")
+	def x = test("test", "test1")
 }
 
-def call(String gitRepo, String gitProj) {
+def test(String gitRepo, String gitProj) {
   def pomData =  readFileFromWorkspace('pom.xml')
   def buildStatus 
   pipeline {
