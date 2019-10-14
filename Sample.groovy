@@ -22,7 +22,7 @@ job("Merge-Release-Git") {
 	     batchFile('echo Hello World! ' )
 	     conditionalSteps {
             condition {
-                stringsMatch('${DESTINATION_BRANCH}', 'Master', true)
+                stringsMatch('${DESTINATION_BRANCH}', 'Master', false)
             }
             steps {
 				batchFile('git branch')
@@ -35,7 +35,7 @@ job("Merge-Release-Git") {
 			 
 		 conditionalSteps {
             condition {
-                stringsMatch('${TAG_REQUIRED}', 'Yes', true)
+                stringsMatch('${TAG_REQUIRED}', 'Yes', false)
             }
             steps {
 				
