@@ -20,10 +20,11 @@ job("Merge-Release-Git") {
 		 release =  getReleasedVersion()
 	     batchFile("echo Hello World!  ${release} ")
 	     batchFile('echo Hello World! ' )
-	     conditionalAction {
+	     conditionalSteps {
             condition {
                 stringsMatch('${DESTINATION_BRANCH}', 'Master', false)
             }
+			runner('Fail')
             steps {
 				batchFile('git branch')
 				batchFile('git checkout ${DESTINATION_BRANCH}')
@@ -33,7 +34,7 @@ job("Merge-Release-Git") {
             }
         }
 			 
-		 conditionalAction {
+		 conditionalSteps {
             condition {
                 stringsMatch('${TAG_REQUIRED}', 'Yes', false)
             }
