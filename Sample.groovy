@@ -24,11 +24,13 @@ job("Merge-Release-Git") {
 	     batchFile('echo Hello World! ' )
 	     batchFile('git branch')
 		 
+		 script{
 		 if("${TAG_REQUIRED}"){
 			batchFile('git tag -a ${release} -m "New version ${release} " ')
 			batchFile('git push origin ${release}')
 			batchFile('git checkout ${release}')
 			batchFile('git merge master')
+		 }
 		 }
 	     triggers {
 			bitbucketPush()
