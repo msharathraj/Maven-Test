@@ -16,11 +16,15 @@ job("Merge-Release-Git") {
           }
         }
     }
-	conditionalSteps {
+    steps {
+		 release =  getReleasedVersion()
+	     batchFile("echo Hello World!  ${release} ")
+	     batchFile('echo Hello World! ' )
+	     conditionalSteps {
             condition {
                 stringsMatch('${DESTINATION_BRANCH}', 'Master', true)
             }
-			runner('Fail')
+			runner('Run')
             steps {
 				batchFile('git branch')
 				batchFile('git checkout ${DESTINATION_BRANCH}')
@@ -29,11 +33,6 @@ job("Merge-Release-Git") {
 				
             }
         }
-    steps {
-		 release =  getReleasedVersion()
-	     batchFile("echo Hello World!  ${release} ")
-	     batchFile('echo Hello World! ' )
-	     
 			 
 		 conditionalSteps {
             condition {
