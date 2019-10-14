@@ -17,26 +17,37 @@ job("Merge-Release-Git") {
         }
     }
     steps {
-		
 		 release =  getReleasedVersion()
 	     batchFile("echo Hello World!  ${release} ")
-	     
 	     batchFile('echo Hello World! ' )
-	     batchFile('git branch')
-		 
+	     conditionalSteps {
+            condition {
+                stringsMatch('${DESTINATION_BRANCH}', 'Master', true)
+            }
+            steps {
+				batchFile('git branch')
+				batchFile('git checkout ${DESTINATION_BRANCH}')
+				batchFile('git merge ${SOURCE_BRANCH}')
+				batchFile('echo Hello Merge! ' )
+				
+            }
+        }
+			 
 		 conditionalSteps {
             condition {
                 stringsMatch('${TAG_REQUIRED}', 'Yes', true)
             }
             steps {
+				
                 batchFile('git tag -a ${release} -m "New version ${release} " ')
 				batchFile('git push origin ${release}')
 				batchFile('git checkout ${release}')
 				batchFile('git merge master')
+				batchFile('echo Hello Tag! ' )
             }
         }
-		 
-	    triggers {
+		
+		triggers {
 			bitbucketPush()
 		}
 		
