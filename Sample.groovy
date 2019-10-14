@@ -19,8 +19,13 @@ job("Merge-Release-Git") {
     steps {
 		 release =  getReleasedVersion()
 	     batchFile("echo Hello World!  ${release} ")
-	     batchFile("echo DESTINATION_BRANCH ${DESTINATION_BRANCH}! ")
-	     conditionalSteps {
+	     batchFile('echo DESTINATION_BRANCH ${DESTINATION_BRANCH}! ')
+		 batchFile('git branch')
+		 batchFile('git checkout ${DESTINATION_BRANCH}')
+		 batchFile('git merge ${SOURCE_BRANCH}')
+		batchFile('echo Hello Merge! ' )
+	     
+		 /*conditionalSteps {
             condition {
 				stringsMatch("${DESTINATION_BRANCH}", 'Master', true)
             }
@@ -45,15 +50,15 @@ job("Merge-Release-Git") {
 				batchFile('git merge master')
 				batchFile('echo Hello Tag! ' )
             }
-        }
+        } */
 		
 		triggers {
 			bitbucketPush()
 		}
 		
-		maven {
+		/*maven {
             goals('clean build deploy')
-        }
+        }*/
 		/*resolveArtifacts {
             failOnError()
             snapshotUpdatePolicy('always')
