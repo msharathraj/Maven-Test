@@ -56,9 +56,9 @@ job("Merge-Release-Test") {
 			bitbucketPush()
 		}
 		
-		/*maven {
-            goals('clean build deploy')
-        }*/
+		maven {
+            goals('clean install')
+        }
 		/*resolveArtifacts {
             failOnError()
             snapshotUpdatePolicy('always')
