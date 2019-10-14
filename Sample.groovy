@@ -8,7 +8,7 @@ job("Merge-Release-Git") {
      scm {
         git {
           remote {
-			url('https://github.com/msharathraj/SampleTest.git')
+			url('https://github.com/msharathraj/Maven-Test.git')
             branch('develop')
             extensions {
                 localBranch('develop')
