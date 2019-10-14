@@ -1,4 +1,4 @@
-job("Merge-Release-Git") {
+job("Merge-Release-Test") {
 	def pomData =  readFileFromWorkspace('pom.xml')
 	parameters {
 		choiceParam('SOURCE_BRANCH', ['Develop', 'Master'], 'Source branch from code is merged to Destination')
