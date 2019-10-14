@@ -22,7 +22,7 @@ job("Merge-Release-Test") {
 	     batchFile('echo DESTINATION_BRANCH ${DESTINATION_BRANCH}! ')
 		 batchFile('git branch')
 		 batchFile('git checkout master')
-		 batchFile('git merge test')
+		 batchFile('git merge origin/test')
 		batchFile('echo Hello Merge! ' )
 	     
 		 /*conditionalSteps {
