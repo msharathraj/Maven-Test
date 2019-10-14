@@ -1,10 +1,10 @@
 job("Merge-Release-Git") {
 	def pomData =  readFileFromWorkspace('pom.xml')
-	/*parameters {
+	parameters {
 		choiceParam('SOURCE_BRANCH', ['Develop', 'Master'], 'Source branch from code is merged to Destination')
 		choiceParam('DESTINATION_BRANCH', ['Master', 'Release'], 'Destination branch where the code should be merged')
 		choiceParam('TAG_REQUIRED', ['Yes', 'No'], 'Do you require a tag creation')
-	}*/
+	}
      scm {
         git {
           remote {
@@ -24,16 +24,17 @@ job("Merge-Release-Git") {
 	     batchFile('echo Hello World! ' )
 	     batchFile('git branch')
 		 
-		 /*if(${TAG_REQUIRED}){
-			batchFile('git tag -a ${release} -m "New version 1.4" ')
+		 if(${TAG_REQUIRED}){
+			batchFile('git tag -a ${release} -m "New version ${release} " ')
 			batchFile('git push origin ${release}')
 			batchFile('git checkout ${release}')
 			batchFile('git merge master')
-		 }*/
+		 }
 	     triggers {
 			bitbucketPush()
 		}
-		maven {
+		
+		/*maven {
             //goals('clean')
             //goals('verify')
             properties(skipTests: true)
@@ -55,7 +56,7 @@ job("Merge-Release-Git") {
                 version('1.1.1')
                 classifier('sources')
             }
-        }
+        } */
 	 }
 }
 def getReleasedVersion() {
