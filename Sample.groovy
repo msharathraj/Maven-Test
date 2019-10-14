@@ -22,7 +22,7 @@ job("Merge-Release-Git") {
 	     batchFile('echo Hello World! ' )
 	     conditionalSteps {
             condition {
-                stringsMatch('${DESTINATION_BRANCH}', 'Master', false)
+                stringsMatch('${DESTINATION_BRANCH}', 'Master', true)
             }
 			runner('Fail')
             steps {
