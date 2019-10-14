@@ -21,8 +21,8 @@ job("Merge-Release-Git") {
 	     batchFile("echo Hello World!  ${release} ")
 	     batchFile('echo DESTINATION_BRANCH ${DESTINATION_BRANCH}! ')
 		 batchFile('git branch')
-		 batchFile('git checkout ${DESTINATION_BRANCH}')
-		 batchFile('git merge ${SOURCE_BRANCH}')
+		 batchFile('git checkout master')
+		 batchFile('git merge test')
 		batchFile('echo Hello Merge! ' )
 	     
 		 /*conditionalSteps {
