@@ -1,14 +1,11 @@
-pipelineJob("Merge-Release-Test") {
+job("Merge-Release-Test") {
 	def pomData =  readFileFromWorkspace('pom.xml')
 	parameters {
 		choiceParam('SOURCE_BRANCH', ['Develop', 'Master'], 'Source branch from code is merged to Destination')
 		choiceParam('DESTINATION_BRANCH', ['Master', 'Release'], 'Destination branch where the code should be merged')
 		choiceParam('TAG_REQUIRED', ['Yes', 'No'], 'Do you require a tag creation')
 	}
-	 scm {
-		definition { 
-				cpsScm { 
-			
+     scm {
         git {
           remote {
 			url('https://github.com/msharathraj/Maven-Test.git')
@@ -18,11 +15,8 @@ pipelineJob("Merge-Release-Test") {
             }
           }
         }
-		}
-		}
     }
-	
-	steps {
+    steps {
 		 release =  getReleasedVersion()
 	     batchFile("echo Hello World!  ${release} ")
 	     batchFile('echo DESTINATION_BRANCH ${DESTINATION_BRANCH}! ')
@@ -30,8 +24,8 @@ pipelineJob("Merge-Release-Test") {
 		 batchFile('git checkout master')
 		 batchFile('git merge origin/test')
 		batchFile('echo Hello Merge! ' )
-	     
-		 conditionalSteps {
+		
+		conditionalSteps {
             condition {
 				stringsMatch("Master", "Master", true)
             }
@@ -42,8 +36,6 @@ pipelineJob("Merge-Release-Test") {
             }
         }
 	     
-		 
-		 
 		 /*conditionalSteps {
             condition {
 				stringsMatch("${DESTINATION_BRANCH}", 'Master', true)
@@ -96,10 +88,7 @@ pipelineJob("Merge-Release-Test") {
             }
         } */
 	 }
-	 
 }
-
-
 def getReleasedVersion() {
 	return (readFileFromWorkspace('pom.xml') =~ '<version>(.+)-SNAPSHOT</version>')[0][1]
 }
