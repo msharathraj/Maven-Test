@@ -20,6 +20,7 @@ job("Merge-Release-Test") {
 	conditionalSteps {
             condition {
 				stringsMatch('Master', 'Master', true)
+				batchFile('git branch')
             }
 			runner('Run')
             steps {
