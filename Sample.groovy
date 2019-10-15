@@ -17,7 +17,22 @@ job("Merge-Release-Test") {
         }
     }
     steps {
-		 release =  getReleasedVersion()
+	
+	
+		release =  getReleasedVersion()
+		/*batchFile('git tag -a ${release} -m "New version ${release} " ')
+		batchFile('git push origin ${release}')
+		batchFile('git checkout ${release}')
+		batchFile('git merge develop')
+		//batchFile('mvn build' )
+		
+		batchFile('echo Hello Tag! ' )
+		
+		batchFile('git checkout release')
+		batchFile('git merge develop')
+		
+		
+	
 	     batchFile("echo Hello World!  ${release} ")
 	     batchFile('echo DESTINATION_BRANCH ${DESTINATION_BRANCH}! ')
 		 batchFile('git branch')
@@ -26,53 +41,13 @@ job("Merge-Release-Test") {
 		 batchFile('echo Hello Merge! ' )
 		 batchFile("def mvnhome = tool name: 'MAVEN', type: 'maven'")
 		 
-		 batchFile( "echo ${mvnhome}/bin/mvn install")
+		 batchFile( "echo ${mvnhome}/bin/mvn install")*/
 		 
-		 release =  getReleasedVersion()
-	     batchFile("echo Hello World!  ${release} ")
-	     batchFile('echo DESTINATION_BRANCH ${DESTINATION_BRANCH}! ')
-		 batchFile('git branch')
-		 batchFile('git checkout master')
-		 batchFile('git merge origin/test')
-		 batchFile('echo Hello Merge! ' )
-		
-		conditionalSteps {
-            condition {
-				stringsMatch("Master", "Master", true)
-            }
-			runner('Run')
-            steps {
-				batchFile('git branch')
-				batchFile('echo Hello steps! ' )
-            }
-        }
-	     
-		 /*conditionalSteps {
-            condition {
-				stringsMatch("${DESTINATION_BRANCH}", 'Master', true)
-            }
-			runner('Run')
-            steps {
-				batchFile('git branch')
-				batchFile('git checkout ${DESTINATION_BRANCH}')
-				batchFile('git merge ${SOURCE_BRANCH}')
-				batchFile('echo Hello Merge! ' )
-            }
-        }
-			 
-		 conditionalSteps {
-            condition {
-                stringsMatch("${TAG_REQUIRED}", 'Yes', false)
-            }
-            steps {
-				
-                batchFile('git tag -a ${release} -m "New version ${release} " ')
-				batchFile('git push origin ${release}')
-				batchFile('git checkout ${release}')
-				batchFile('git merge master')
-				batchFile('echo Hello Tag! ' )
-            }
-        } */
+		 batchFile('echo ${currentBuild.currentResult}')
+		 
+		 if ('${currentBuild.currentResult}' == "SUCESS"){
+			batchFile('echo ${currentBuild.currentResult}')
+		 }
 		
 		triggers {
 			bitbucketPush()
@@ -82,22 +57,7 @@ job("Merge-Release-Test") {
             goals('clean')
             goals('install')
         }
-		/*resolveArtifacts {
-            failOnError()
-            snapshotUpdatePolicy('always')
-            targetDirectory('lib')
-            artifact {
-                groupId('org.slf4j')
-                artifactId('slf4j-api')
-                version('[1.7.5,1.7.6]')
-            }
-            artifact {
-                groupId('ch.qos.logback')
-                artifactId('logback-classic')
-                version('1.1.1')
-                classifier('sources')
-            }
-        } */
+		
 	 }
 }
 def getReleasedVersion() {
