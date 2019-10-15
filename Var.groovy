@@ -1,8 +1,7 @@
-
 def call(String gitRepo, String gitProj) {
   def pomData =  readFileFromWorkspace('pom.xml')
   def buildStatus 
-  pipeline {
+  pipelineJob('Your App Pipeline') { 
     agent any
 
     parameters {
@@ -14,17 +13,24 @@ def call(String gitRepo, String gitProj) {
     stages {
       stage('git-checkout') {
         steps {
-          scm {
-			git {
-				remote {
-					url('https://github.com/msharathraj/Maven-Test.git')
-					branch('develop')
-					extensions {
-						localBranch('develop')
+			definition { 
+				cpsScm { 
+					scm {
+						git {
+							remote {	
+							url('https://github.com/msharathraj/Maven-Test.git')
+							branch('develop')
+							extensions {
+								localBranch('develop')
+							}
 						}
-					}
 				}
 			}
+						
+    } 
+ 		
+		
+          
         }
       }
       stage('git-merge') {
