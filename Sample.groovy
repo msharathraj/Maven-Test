@@ -1,5 +1,6 @@
 job("Merge-Release-Test") {
 	def pomData =  readFileFromWorkspace('pom.xml')
+	def mvnhome = tool name: 'MAVEN', type: 'maven'
 	parameters {
 		choiceParam('SOURCE_BRANCH', ['Develop', 'Master'], 'Source branch from code is merged to Destination')
 		choiceParam('DESTINATION_BRANCH', ['Master', 'Release'], 'Destination branch where the code should be merged')
@@ -16,51 +17,90 @@ job("Merge-Release-Test") {
           }
         }
     }
-    steps{
-	conditionalSteps {
-            condition {
-				stringsMatch('Master', 'Master', false)
-				batchFile('git branch false')
-            }
-			runner('Run')
-            steps {
-				batchFile('git branch')
-				batchFile('echo Hello steps false! ' )
-            }
-        }
-		conditionalSteps {
-            condition {
-				stringsMatch('Master', 'Master', true)
-				batchFile('echo branch true')
-            }
-			runner('Run')
-            steps {
-				batchFile('git branch')
-				batchFile('echo Hello steps true! ' )
-            }
-        }
+    steps {
+		 release =  getReleasedVersion()
+	     batchFile("echo Hello World!  ${release} ")
+	     batchFile('echo DESTINATION_BRANCH ${DESTINATION_BRANCH}! ')
+		 batchFile('git branch')
+		 batchFile('git checkout master')
+		 batchFile('git merge origin/test')
+		 batchFile('echo Hello Merge! ' )
+		 
+		 
+		 batchFile( "echo ${mvnhome}/bin/mvn install")
+		 
+		 release =  getReleasedVersion()
+	     batchFile("echo Hello World!  ${release} ")
+	     batchFile('echo DESTINATION_BRANCH ${DESTINATION_BRANCH}! ')
+		 batchFile('git branch')
+		 batchFile('git checkout master')
+		 batchFile('git merge origin/test')
+		 batchFile('echo Hello Merge! ' )
+		
 		conditionalSteps {
             condition {
 				stringsMatch("Master", "Master", true)
-				batchFile('echo branch true')
             }
 			runner('Run')
             steps {
 				batchFile('git branch')
-				batchFile('echo Hello steps true double! ' )
+				batchFile('echo Hello steps! ' )
             }
         }
-		conditionalSteps {
+	     
+		 /*conditionalSteps {
             condition {
-				stringsMatch("Master", "Master", true)
-				batchFile('echo branch true')
+				stringsMatch("${DESTINATION_BRANCH}", 'Master', true)
             }
-			runner('Fail')
+			runner('Run')
             steps {
 				batchFile('git branch')
-				batchFile('echo Hello steps true double! fail' )
+				batchFile('git checkout ${DESTINATION_BRANCH}')
+				batchFile('git merge ${SOURCE_BRANCH}')
+				batchFile('echo Hello Merge! ' )
             }
         }
-	}	
-	
+			 
+		 conditionalSteps {
+            condition {
+                stringsMatch("${TAG_REQUIRED}", 'Yes', false)
+            }
+            steps {
+				
+                batchFile('git tag -a ${release} -m "New version ${release} " ')
+				batchFile('git push origin ${release}')
+				batchFile('git checkout ${release}')
+				batchFile('git merge master')
+				batchFile('echo Hello Tag! ' )
+            }
+        } */
+		
+		triggers {
+			bitbucketPush()
+		}
+		
+		maven {
+            goals('clean')
+            goals('install')
+        }
+		/*resolveArtifacts {
+            failOnError()
+            snapshotUpdatePolicy('always')
+            targetDirectory('lib')
+            artifact {
+                groupId('org.slf4j')
+                artifactId('slf4j-api')
+                version('[1.7.5,1.7.6]')
+            }
+            artifact {
+                groupId('ch.qos.logback')
+                artifactId('logback-classic')
+                version('1.1.1')
+                classifier('sources')
+            }
+        } */
+	 }
+}
+def getReleasedVersion() {
+	return (readFileFromWorkspace('pom.xml') =~ '<version>(.+)-SNAPSHOT</version>')[0][1]
 }
