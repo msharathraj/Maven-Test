@@ -18,7 +18,6 @@ job("Merge-Release-Test") {
     }
     steps {
 	
-	
 		release =  getReleasedVersion()
 		/*batchFile('git tag -a ${release} -m "New version ${release} " ')
 		batchFile('git push origin ${release}')
@@ -43,23 +42,31 @@ job("Merge-Release-Test") {
 		 
 		 batchFile( "echo ${mvnhome}/bin/mvn install")*/
 		 
-		 println "${currentResult}"
-		 
-		 if ("${currentBcurrentResultuild}" == Result.SUCESS){
-			batchFile('echo ${currentResult}')
-		 }
+		test()
 		
 		triggers {
 			bitbucketPush()
 		}
 		
 		maven {
-            goals('clean')
-            goals('install')
+            goals('clean install deploy')
         }
-		
 	 }
 }
 def getReleasedVersion() {
 	return (readFileFromWorkspace('pom.xml') =~ '<version>(.+)-SNAPSHOT</version>')[0][1]
+}
+
+def test(){
+		def jenkins = Jenkins.getInstance()
+		def jobName = "myJob"
+		def job = jenkins.getItem(jobName)
+
+		println "Job type: ${job.getClass()}"
+		println "Is building: ${job.isBuilding()}"
+		println "Is in queue: ${job.isInQueue()}"
+		println "Last successfull build: ${job.getLastSuccessfulBuild()}"
+		println "Last failed build: ${job.getLastFailedBuild()}"
+		println "Last build: ${job.getLastBuild()}"
+		println "All builds: ${job.getBuilds().collect{ it.getNumber()}}"
 }
