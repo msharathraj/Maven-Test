@@ -1,6 +1,5 @@
 job("Merge-Release-Test") {
 	def pomData =  readFileFromWorkspace('pom.xml')
-	def mvnhome = tool name: 'MAVEN', type: 'maven'
 	parameters {
 		choiceParam('SOURCE_BRANCH', ['Develop', 'Master'], 'Source branch from code is merged to Destination')
 		choiceParam('DESTINATION_BRANCH', ['Master', 'Release'], 'Destination branch where the code should be merged')
@@ -25,7 +24,7 @@ job("Merge-Release-Test") {
 		 batchFile('git checkout master')
 		 batchFile('git merge origin/test')
 		 batchFile('echo Hello Merge! ' )
-		 
+		 batchFile("def mvnhome = tool name: 'MAVEN', type: 'maven'")
 		 
 		 batchFile( "echo ${mvnhome}/bin/mvn install")
 		 
