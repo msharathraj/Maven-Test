@@ -5,7 +5,12 @@ pipelineJob("Merge-Release-Test") {
 		choiceParam('DESTINATION_BRANCH', ['Master', 'Release'], 'Destination branch where the code should be merged')
 		choiceParam('TAG_REQUIRED', ['Yes', 'No'], 'Do you require a tag creation')
 	}
+	stages('Test'){
+	stage('Test') {
      scm {
+		definition { 
+				cpsScm { 
+			
         git {
           remote {
 			url('https://github.com/msharathraj/Maven-Test.git')
@@ -15,7 +20,11 @@ pipelineJob("Merge-Release-Test") {
             }
           }
         }
+		}
+		}
     }
+	}
+	stage('merge'){
     steps {
 		 release =  getReleasedVersion()
 	     batchFile("echo Hello World!  ${release} ")
@@ -76,6 +85,7 @@ pipelineJob("Merge-Release-Test") {
                 classifier('sources')
             }
         } */
+	 }
 	 }
 }
 def getReleasedVersion() {
