@@ -44,7 +44,7 @@ job("Merge-Release-Test") {
 		 
 		script{
 			def logs = currentBuild.result
-			if(logs == "SUCCESS")
+			 batchFile("echo logs") 
 		}
 		
 		triggers {
@@ -60,16 +60,3 @@ def getReleasedVersion() {
 	return (readFileFromWorkspace('pom.xml') =~ '<version>(.+)-SNAPSHOT</version>')[0][1]
 }
 
-def test(){
-		def jenkins = Jenkins.getInstance()
-		def jobName = "myJob"
-		def job = jenkins.getItem(jobName)
-
-		println "Job type: ${job.getClass()}"
-		println "Is building: ${job.isBuilding()}"
-		println "Is in queue: ${job.isInQueue()}"
-		println "Last successfull build: ${job.getLastSuccessfulBuild()}"
-		println "Last failed build: ${job.getLastFailedBuild()}"
-		println "Last build: ${job.getLastBuild()}"
-		println "All builds: ${job.getBuilds().collect{ it.getNumber()}}"
-}
