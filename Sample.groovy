@@ -43,9 +43,9 @@ job("Merge-Release-Test") {
 		 
 		 batchFile( "echo ${mvnhome}/bin/mvn install")*/
 		 
-		 batchFile("echo '${currentBuild.currentResult}'")
+		 batchFile("echo '${currentBuild.rawBuild.result}'")
 		 
-		 if ("${currentBuild.currentResult}" == Result.SUCESS){
+		 if ("${currentBuild.rawBuild.result}" == Result.SUCESS){
 			batchFile('echo ${currentBuild.currentResult}')
 		 }
 		
