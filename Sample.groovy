@@ -5,9 +5,7 @@ pipelineJob("Merge-Release-Test") {
 		choiceParam('DESTINATION_BRANCH', ['Master', 'Release'], 'Destination branch where the code should be merged')
 		choiceParam('TAG_REQUIRED', ['Yes', 'No'], 'Do you require a tag creation')
 	}
-	stages{
-	stage('Test') {
-     scm {
+	 scm {
 		definition { 
 				cpsScm { 
 			
@@ -23,9 +21,8 @@ pipelineJob("Merge-Release-Test") {
 		}
 		}
     }
-	}
-	stage('merge'){
-    steps {
+	
+	steps {
 		 release =  getReleasedVersion()
 	     batchFile("echo Hello World!  ${release} ")
 	     batchFile('echo DESTINATION_BRANCH ${DESTINATION_BRANCH}! ')
@@ -34,6 +31,19 @@ pipelineJob("Merge-Release-Test") {
 		 batchFile('git merge origin/test')
 		batchFile('echo Hello Merge! ' )
 	     
+		 conditionalSteps {
+            condition {
+				stringsMatch("Master", "Master", true)
+            }
+			runner('Run')
+            steps {
+				batchFile('git branch')
+				batchFile('echo Hello steps! ' )
+            }
+        }
+	     
+		 
+		 
 		 /*conditionalSteps {
             condition {
 				stringsMatch("${DESTINATION_BRANCH}", 'Master', true)
@@ -86,10 +96,10 @@ pipelineJob("Merge-Release-Test") {
             }
         } */
 	 }
-	 }
+	 
 }
 
-}
+
 def getReleasedVersion() {
 	return (readFileFromWorkspace('pom.xml') =~ '<version>(.+)-SNAPSHOT</version>')[0][1]
 }
