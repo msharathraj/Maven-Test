@@ -19,7 +19,7 @@ job("Merge-Release-Test") {
     steps{
 	conditionalSteps {
             condition {
-				stringsMatch('Master', 'Master', false)
+				stringsMatch('Master', 'Master', true)
             }
 			runner('Run')
             steps {
