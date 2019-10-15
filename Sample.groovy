@@ -17,15 +17,48 @@ job("Merge-Release-Test") {
         }
     }
     steps{
-	singleConditionalBuilder {
+	conditionalSteps {
             condition {
-				stringsMatch('Master', 'Master', true)
-				batchFile('git branch')
+				stringsMatch('Master', 'Master', false)
+				batchFile('git branch false')
             }
-			runner('fail')
+			runner('Run')
             steps {
 				batchFile('git branch')
-				batchFile('echo Hello steps! ' )
+				batchFile('echo Hello steps false! ' )
+            }
+        }
+		conditionalSteps {
+            condition {
+				stringsMatch('Master', 'Master', true)
+				batchFile('echo branch true')
+            }
+			runner('Run')
+            steps {
+				batchFile('git branch')
+				batchFile('echo Hello steps true! ' )
+            }
+        }
+		conditionalSteps {
+            condition {
+				stringsMatch("Master", "Master", true)
+				batchFile('echo branch true')
+            }
+			runner('Run')
+            steps {
+				batchFile('git branch')
+				batchFile('echo Hello steps true double! ' )
+            }
+        }
+		conditionalSteps {
+            condition {
+				stringsMatch("Master", "Master", true)
+				batchFile('echo branch true')
+            }
+			runner('Fail')
+            steps {
+				batchFile('git branch')
+				batchFile('echo Hello steps true double! fail' )
             }
         }
 	}	
