@@ -17,12 +17,12 @@ job("Merge-Release-Test") {
         }
     }
     steps{
-	conditionalSteps {
+	singleConditionalBuilder {
             condition {
 				stringsMatch('Master', 'Master', true)
 				batchFile('git branch')
             }
-			runner('Run')
+			runner('fail')
             steps {
 				batchFile('git branch')
 				batchFile('echo Hello steps! ' )
