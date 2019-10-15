@@ -42,7 +42,10 @@ job("Merge-Release-Test") {
 		 
 		 batchFile( "echo ${mvnhome}/bin/mvn install")*/
 		 
-		test()
+		script{
+			def logs = currentBuild.result
+			if(logs == "SUCCESS")
+		}
 		
 		triggers {
 			bitbucketPush()
