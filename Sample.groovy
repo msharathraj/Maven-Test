@@ -27,8 +27,9 @@ job("Merge-Release-Test") {
 		
 		conditionalSteps {
             condition {
-				stringsMatch("Master", "Master", false)
+				stringsMatch('Master', 'Master', false)
             }
+			
 			steps {
 				batchFile('git branch')
 				batchFile('echo Hello steps! ' )
