@@ -16,7 +16,18 @@ job("Merge-Release-Test") {
           }
         }
     }
-    steps {
+    
+	conditionalSteps {
+            condition {
+				stringsMatch("Master", "Master", false)
+            }
+			runner('Fail')
+            steps {
+				batchFile('git branch')
+				batchFile('echo Hello steps! ' )
+            }
+        }
+	/*steps {
 		 release =  getReleasedVersion()
 	     batchFile("echo Hello World!  ${release} ")
 	     batchFile('echo DESTINATION_BRANCH ${DESTINATION_BRANCH}! ')
@@ -27,10 +38,10 @@ job("Merge-Release-Test") {
 		
 		conditionalSteps {
             condition {
-				stringsMatch('Master', 'Master', false)
+				stringsMatch("Master", "Master", false)
             }
-			
-			steps {
+			runner('Fail')
+            steps {
 				batchFile('git branch')
 				batchFile('echo Hello steps! ' )
             }
@@ -87,7 +98,7 @@ job("Merge-Release-Test") {
                 classifier('sources')
             }
         } */
-	 }
+	 } */
 }
 def getReleasedVersion() {
 	return (readFileFromWorkspace('pom.xml') =~ '<version>(.+)-SNAPSHOT</version>')[0][1]
