@@ -16,16 +16,16 @@ job("Merge-Release-Test") {
           }
         }
     }
-    
+    steps{
 	conditionalSteps {
             condition {
-				stringsMatch("Master", "Master", false)
+				stringsMatch('Master', 'Master', false)
             }
-			runner('Fail')
-            steps {
+			steps {
 				batchFile('git branch')
 				batchFile('echo Hello steps! ' )
             }
         }
+	}	
 	
 }
