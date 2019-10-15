@@ -5,7 +5,7 @@ pipelineJob("Merge-Release-Test") {
 		choiceParam('DESTINATION_BRANCH', ['Master', 'Release'], 'Destination branch where the code should be merged')
 		choiceParam('TAG_REQUIRED', ['Yes', 'No'], 'Do you require a tag creation')
 	}
-	stages('Test'){
+	stages{
 	stage('Test') {
      scm {
 		definition { 
