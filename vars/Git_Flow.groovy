@@ -5,7 +5,7 @@ def call(String gitRepo, String gitProj) {
 	}
 	}
 }
-def artifactReleaseProcesstest(){
+static def artifactReleaseProcesstest(){
 	
 	bat "echo passed lib release"
 		
