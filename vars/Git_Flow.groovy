@@ -1,8 +1,30 @@
 def call(String gitRepo, String gitProj) {
 	
+	node {
+		pipeline {
+		git url: "https://github.com/jenkinsci/${name}-plugin.git"
+			git {
+				remote {
+					url("https://github.com/msharathraj/Maven-Test.git")
+					branch('master')
+					extensions {
+					localBranch('master')
+				}
+			  }
+			}
+		stages {
+			release =  getReleasedVersion()
+			stage('Merge-Release'){
+				bat "echo passed lib"
+			}
+		}	
+		
+		}
+        
+    }
 	
 	
-	pipeline {
+	/*pipeline {
 		parameters {
 			choiceParam('SOURCE_BRANCH', ['Develop', 'Master'], 'Source branch from code is merged to Destination')
 			choiceParam('DESTINATION_BRANCH', ['Master', 'Release'], 'Destination branch where the code should be merged')
@@ -52,5 +74,5 @@ def call(String gitRepo, String gitProj) {
 				batchFile('mvn -Drevision='${release}' clean deploy')
 			}*/
 		}
-	}
+	} */
 }
