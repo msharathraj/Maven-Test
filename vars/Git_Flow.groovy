@@ -57,6 +57,3 @@ def call(String gitRepo, String gitProj) {
 		}
 	}
 }
-def getReleasedVersion() {
-	return (readFileFromWorkspace('pom.xml') =~ '<version>(.+)-SNAPSHOT</version>')[0][1]
-}
