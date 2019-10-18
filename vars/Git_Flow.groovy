@@ -1,5 +1,8 @@
 def call(String gitRepo, String gitProj) {
 	def pomData =  readFileFromWorkspace('pom.xml')
+	
+	
+	
 	pipeline {
 		parameters {
 			choiceParam('SOURCE_BRANCH', ['Develop', 'Master'], 'Source branch from code is merged to Destination')
@@ -9,7 +12,7 @@ def call(String gitRepo, String gitProj) {
 		scm {
 			git {
 				remote {
-					url("ssh://git@stash.intralinks.com:7999/${gitProj}/${gitRepo}.git")
+					url("https://github.com/msharathraj/Maven-Test.git")
 					branch('master')
 					extensions {
 					localBranch('master')
@@ -48,9 +51,9 @@ def call(String gitRepo, String gitProj) {
 					mvn clean build
 				''')
 			}
-			stage('Release-to-generating'){
+			/*stage('Release-to-generating'){
 				batchFile('mvn -Drevision='${release}' clean deploy')
-			}
+			}*/
 		}
 	}
 }
