@@ -5,7 +5,7 @@ def call(String gitRepo, String gitProj) {
 	}
 	}
 }
-def artifactReleaseProcess(s){
+def artifactReleaseProcess(String s){
 node{
 	
 	stage('Merge-Release-lib'){
