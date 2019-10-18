@@ -1,5 +1,4 @@
 def call(String gitRepo, String gitProj) {
-	def pomData =  readFileFromWorkspace('pom.xml')
 	
 	
 	
