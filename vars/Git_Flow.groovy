@@ -1,17 +1,14 @@
 def call(String gitRepo, String gitProj) {
 	node{
-	stage('Merge-Release'){
-		bat 'echo passed lib release'
+	stage('Release-to-artifactory'){
+				steps {
+					rtServer (
+						//id: "jenkins-artifactory-server",
+						//url: 'http://mvn.ilnxqcdev.com:9955/artifactory',
+						//Need to add credentials
+						//username: 'admin',
+						//password: 'password'
+					)
+				}
 	}
-	}
-}
-static def artifactReleaseProcesstest(){
-	
-		bat 'echo passed lib release arti'
-	
-}
-static def artifactReleaseProcesstest1(String s){
-	
-		bat 'echo passed lib release arti-s'
-	
 }
