@@ -5,10 +5,9 @@ def call(String gitRepo, String gitProj) {
 	}
 	}
 }
-def artifactReleaseProcess(String s){
+def artifactReleaseProcess(String ss){
 	
-	stage('Merge-Release-lib'){
-		bat "echo passed lib release"
-	}	
+	bat "echo passed lib release"
+		
 
 }
