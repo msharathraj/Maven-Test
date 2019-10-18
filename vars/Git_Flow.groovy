@@ -8,7 +8,6 @@ def call(String gitRepo, String gitProj) {
 			choiceParam('DESTINATION_BRANCH', ['Master', 'Release'], 'Destination branch where the code should be merged')
 			choiceParam('TAG_REQUIRED', ['Yes', 'No'], 'Do you require a tag creation')
 		}
-		scm {
 			git {
 				remote {
 					url("https://github.com/msharathraj/Maven-Test.git")
@@ -18,7 +17,6 @@ def call(String gitRepo, String gitProj) {
 				}
 			  }
 			}
-		}
 		stages {
 			release =  getReleasedVersion()
 			stage('Merge-Release'){
