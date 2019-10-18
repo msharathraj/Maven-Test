@@ -1,0 +1,5 @@
+#NOTE: This is an internal implementation file, its format can be changed without prior notice.
+#Fri Oct 11 21:50:14 IST 2019
+http\://mvn.ilnxqcdev.com\:9955/artifactory/repo/.lastUpdated=1570810814564
+0279d6529f219754e19f4b2f8ee3ed902868882d@default-http\://atl-artfct-01.ilnxqcdev.com\:9955/artifactory/repo/.lastUpdated=1570810814075
+http\://atl-artfct-01.ilnxqcdev.com\:9955/artifactory/repo/.error=Could not transfer artifact org.apache.maven.doxia\:doxia\:pom\:1.0-alpha-7 from/to qc (http\://atl-artfct-01.ilnxqcdev.com\:9955/artifactory/repo/)\: Connection to http\://atl-artfct-01.ilnxqcdev.com\:9955 refused

@@ -1,0 +1,5 @@
+#NOTE: This is an internal implementation file, its format can be changed without prior notice.
+#Fri Oct 11 21:40:55 IST 2019
+http\://mvn.ilnxqcdev.com\:9955/artifactory/repo/.lastUpdated=1570810255481
+0279d6529f219754e19f4b2f8ee3ed902868882d@default-http\://atl-artfct-01.ilnxqcdev.com\:9955/artifactory/repo/.lastUpdated=1570810254789
+http\://atl-artfct-01.ilnxqcdev.com\:9955/artifactory/repo/.error=Could not transfer artifact org.apache.maven.plugins\:maven-install-plugin\:jar\:2.3.1 from/to qc (http\://atl-artfct-01.ilnxqcdev.com\:9955/artifactory/repo/)\: Connection to http\://atl-artfct-01.ilnxqcdev.com\:9955 refused

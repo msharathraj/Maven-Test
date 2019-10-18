@@ -1,0 +1,5 @@
+#NOTE: This is an internal implementation file, its format can be changed without prior notice.
+#Fri Oct 11 21:35:30 IST 2019
+http\://mvn.ilnxqcdev.com\:9955/artifactory/repo/.lastUpdated=1570809930656
+0279d6529f219754e19f4b2f8ee3ed902868882d@default-http\://atl-artfct-01.ilnxqcdev.com\:9955/artifactory/repo/.lastUpdated=1570809929954
+http\://atl-artfct-01.ilnxqcdev.com\:9955/artifactory/repo/.error=Could not transfer artifact org.apache\:apache\:pom\:9 from/to qc (http\://atl-artfct-01.ilnxqcdev.com\:9955/artifactory/repo/)\: Connection to http\://atl-artfct-01.ilnxqcdev.com\:9955 refused
