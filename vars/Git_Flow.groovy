@@ -7,13 +7,11 @@ def call(String gitRepo, String gitProj) {
 }
 static def artifactReleaseProcesstest(){
 	
-	stage('Merge-Release-arti'){
 		bat 'echo passed lib release arti'
-	}
+	
 }
 static def artifactReleaseProcesstest1(String s){
 	
-	stage('Merge-Release-arti-s'){
 		bat 'echo passed lib release arti-s'
-	}
+	
 }
