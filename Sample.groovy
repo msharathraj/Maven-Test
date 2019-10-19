@@ -21,20 +21,12 @@ job('Test-Artifactory'){
 		}
 		stages {
 			stage('Release'){
-				arti()
+				//arti()
 				rtMaven.tool = 'MAVEN'
 				def buildInfo = rtMaven.run goals: 'clean install'
 				server.publishBuildInfo buildInfo
 			}
 		}
 	
-}
-def arti(){
-	
-	def server = Artifactory.server 'jenkins-artifactory-server' , username: 'admin', password: 'password'
-	def rtMaven = Artifactory.newMavenBuild()
-	rtMaven.resolver server: server, releaseRepo: 'sample-repo', snapshotRepo: 'sample-repo-snapshot'
-	rtMaven.deployer server: server, releaseRepo: 'sample-repo-local', snapshotRepo: 'sample-repo-local'
-	rtMaven.deployer.deployArtifacts = 'true'
 }
 	
