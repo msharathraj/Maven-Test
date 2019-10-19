@@ -1,5 +1,3 @@
-import hudson.plugins.*
-import hudson.model.* 
 import hudson.maven.*;
 import hudson.tasks.*;
 import org.jfrog.build.extractor.clientConfiguration.client.ArtifactoryBuildInfoClient;
@@ -8,9 +6,14 @@ import org.jfrog.hudson.maven2.ArtifactsDeployer;
 import org.jfrog.hudson.maven2.MavenBuildInfoDeployer;
 import org.jfrog.hudson.release.promotion.UnifiedPromoteBuildAction;
 
-job('Test-Artifactory'){
+freeStyleJob('Test-Artifactory'){
 	
-	
+	def server = Artifactory.server 'jenkins-artifactory-server' , username: 'admin', password: 'password'
+	def rtMaven = Artifactory.newMavenBuild()
+	rtMaven.resolver server: server, releaseRepo: 'sample-repo', snapshotRepo: 'sample-repo-snapshot'
+	rtMaven.deployer server: server, releaseRepo: 'sample-repo-local', snapshotRepo: 'sample-repo-local'
+	rtMaven.deployer.deployArtifacts = true
+	pipeline{
 		parameters {
 			choiceParam('SOURCE_BRANCH', ['Master', 'Develop'], 'Source branch from code is merged to Destination')
 			choiceParam('DESTINATION_BRANCH', ['Master', 'Release'], 'Destination branch where the code should be merged')
@@ -28,9 +31,14 @@ job('Test-Artifactory'){
 			  }
 			}
 		}
-	steps {
-		println 'asd'	
-	}
+		stages {
+			stage('Release'){
+				rtMaven.tool = 'MAVEN'
+				def buildInfo = rtMaven.run goals: 'clean install'
+				server.publishBuildInfo buildInfo
+			}
+		}
+	}	
 	
 }
 
