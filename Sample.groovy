@@ -1,4 +1,4 @@
-job(){
+job('test'){
 node {
   withMaven(maven:'M3') {
     stage('Checkout') {
