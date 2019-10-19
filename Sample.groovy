@@ -16,12 +16,12 @@ job("job-dsl-artifactory-freestyle-maven-example") {
             // === Resolver ===
             enableResolveArtifacts true
             resolverDetails {
-                artifactoryName SERVER_ID
+                artifactoryName 'jenkins-artifactory-server'
                 resolveReleaseRepository {
-                    keyFromText 'libs-release'
+                    keyFromText 'example-repo'
                 }
                 resolveSnapshotRepository {
-                    keyFromText 'libs-snapshot'
+                    keyFromText 'example-repo-snapshot'
                 }
             }
             // Optional - Override resolver credentials
@@ -33,10 +33,10 @@ job("job-dsl-artifactory-freestyle-maven-example") {
             deployerDetails {
                 artifactoryName SERVER_ID
                 deployReleaseRepository {
-                    keyFromText 'libs-release-local'
+                    keyFromText 'example-repo'
                 }
                 deploySnapshotRepository {
-                    keyFromText 'libs-snapshot-local'
+                    keyFromText 'example-repo'
                 }
             }
             // Optional - Override deployer credentials
