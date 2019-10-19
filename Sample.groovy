@@ -1,7 +1,6 @@
 import jenkins.model.*
 import org.jfrog.*
 import org.jfrog.hudson.*
-import org.jfrog.hudson.util.Credentials;
 
 def inst = Jenkins.getInstance()
 
