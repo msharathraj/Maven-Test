@@ -1,5 +1,5 @@
 job('test'){
-node('master') {
+
   withMaven(maven:'M3') {
     stage('Checkout') {
       git url: 'https://github.com/piomin/sample-spring-cloud-contract-ci.git', credentialsId: 'piomin-github', branch: 'master'
@@ -15,6 +15,6 @@ node('master') {
       rtMaven.deployer.deployArtifacts buildInfo
       server.publishBuildInfo buildInfo
     }
-  }
+  
 }
 }
