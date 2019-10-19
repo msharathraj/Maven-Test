@@ -1,9 +1,25 @@
-import org.jfrog.hudson.*;
+import jenkins.model.*
+import org.jfrog.*
+import org.jfrog.hudson.*
+import org.jfrog.hudson.util.Credentials;
 
-def server = Artifactory.server 'jenkins-artifactory-server' , username: 'admin', password: 'password'
-def rtMaven = Artifactory.newMavenBuild() 
-   
+def inst = Jenkins.getInstance()
 
-job("job-dsl-artifactory-freestyle-maven-example") {
-    
-}
+def desc = inst.getDescriptor("org.jfrog.hudson.ArtifactoryBuilder")
+
+def deployerCredentials = new CredentialsConfig("admin", "password", "")
+def resolverCredentials = new CredentialsConfig("", "", "")
+
+def sinst = [new ArtifactoryServer(
+  "main",
+  "http://localhost:8081/artifactory",
+  deployerCredentials,
+  resolverCredentials,
+  300,
+  false,
+  3 )
+]
+
+desc.setArtifactoryServers(sinst)
+
+desc.save()
