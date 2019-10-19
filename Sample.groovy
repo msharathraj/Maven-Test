@@ -1,10 +1,5 @@
 import hudson.maven.*;
 import hudson.tasks.*;
-import org.jfrog.build.extractor.clientConfiguration.client.ArtifactoryBuildInfoClient;
-import org.jfrog.hudson.action.ArtifactoryProjectAction;
-import org.jfrog.hudson.maven2.ArtifactsDeployer;
-import org.jfrog.hudson.maven2.MavenBuildInfoDeployer;
-import org.jfrog.hudson.release.promotion.UnifiedPromoteBuildAction;
 
 freeStyleJob('Test-Artifactory'){
 	
