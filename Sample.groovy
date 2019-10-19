@@ -4,6 +4,7 @@ import hudson.model.*
 job('Test-Artifactory'){
 	
 	
+		pipeline{
 		parameters {
 			choiceParam('SOURCE_BRANCH', ['Master', 'Develop'], 'Source branch from code is merged to Destination')
 			choiceParam('DESTINATION_BRANCH', ['Master', 'Release'], 'Destination branch where the code should be merged')
@@ -23,10 +24,10 @@ job('Test-Artifactory'){
 		}
 		stages {
 			stage('Release'){
-				println 'test'
+				println 'asd'
 			}
 		}
-	
+	}
 }
 
 	
