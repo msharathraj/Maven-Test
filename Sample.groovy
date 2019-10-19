@@ -1,10 +1,16 @@
 import hudson.plugins.*
 import hudson.model.* 
+import hudson.maven.*;
+import hudson.tasks.*;
+import org.jfrog.build.extractor.clientConfiguration.client.ArtifactoryBuildInfoClient;
+import org.jfrog.hudson.action.ArtifactoryProjectAction;
+import org.jfrog.hudson.maven2.ArtifactsDeployer;
+import org.jfrog.hudson.maven2.MavenBuildInfoDeployer;
+import org.jfrog.hudson.release.promotion.UnifiedPromoteBuildAction;
 
 job('Test-Artifactory'){
 	
 	
-		pipeline{
 		parameters {
 			choiceParam('SOURCE_BRANCH', ['Master', 'Develop'], 'Source branch from code is merged to Destination')
 			choiceParam('DESTINATION_BRANCH', ['Master', 'Release'], 'Destination branch where the code should be merged')
@@ -22,12 +28,10 @@ job('Test-Artifactory'){
 			  }
 			}
 		}
-		stages {
-			stage('Release'){
-				println 'asd'
-			}
-		}
+	steps {
+		println 'asd'	
 	}
+	
 }
 
 	
