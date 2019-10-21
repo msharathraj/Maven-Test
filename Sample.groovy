@@ -11,13 +11,13 @@ node('master'){
 		
 	stage('checkout')
 	{
-		scm {
+		
             git {
                 remote {
                     url('https://github.com/cameronmcnz/rock-paper-scissors.git')
                 }
                 branch("*/master")
-            }
+            
         }	
 	}	
 	stage('Develop-Merge-Release'){
