@@ -16,7 +16,7 @@ def call(String depReleaseRepo,String depSnapshot,String resReleaseRepo,String r
             )
         rtMavenResolver (
             id: "resolver-unique-id",
-            serverId: "jenkins-artifactory-server",D
+            serverId: "jenkins-artifactory-server",
             releaseRepo: "sample-repo",
             snapshotRepo: "sample-repo"
            )
