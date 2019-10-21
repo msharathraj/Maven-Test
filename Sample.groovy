@@ -16,8 +16,7 @@ node {
 			bat('''
 			git branch 
 			echo "Merging the code from Develop Branch to Release Branch"
-            mvn install
-			''')
+            	''')
 		
 	}
 	stage('Release-Merge-Master'){
@@ -25,8 +24,7 @@ node {
 			bat('''
 			git branch 
 			echo "Merging the code from Master Branch to Release Branch"
-            mvn install
-			
+        		
 			''')
 		
 	}
