@@ -43,6 +43,6 @@ node('master'){
 		}
 	}
 	stage('Release-to-artifactory'){
-		Git_Flow()
+		//Git_Flow()
 	}
 }
