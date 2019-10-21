@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 
 try{
-node('sadasd'){
+node('sadasd-1'){
     steps{
      println 'sdada'   
     }
