@@ -11,7 +11,7 @@ pipelineJob('job-dsl-artifactory-pipeline-example') {
     definition {
 
         cps {
-
+           println 'asdad'
             script(readFileFromWorkspace('Maven-Test/Jenkinsfile'))
 
             
