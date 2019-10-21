@@ -1,12 +1,4 @@
-node('master') {
-
-    parameters {
-
-        stringParam('SERVER_ID', SERVER_ID, 'Enter Artifactory server ID')
-
-    }
-
-
+pipelineJob('sadad-master') {
 
     definition {
 
