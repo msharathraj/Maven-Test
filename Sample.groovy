@@ -12,14 +12,13 @@ node {
         	
 	}	
 	stage('Develop-Merge-Release'){
-		steps{
 		// This stage is going to merge the code from develop to release branch and runs maven to check build
 			bat('''
 			git branch 
 			echo "Merging the code from Develop Branch to Release Branch"
             mvn install
 			''')
-		}
+		
 	}
 	stage('Release-Merge-Master'){
 		// This stage is going to merge the code from develop to release branch and runs maven to check build
