@@ -1,4 +1,4 @@
-pipelinejob('example-1') {
+pipelinejob() {
     deliveryPipelineConfiguration('qa')
     steps{
         deliveryPipelineConfiguration('qa1')
