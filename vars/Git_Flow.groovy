@@ -3,21 +3,31 @@ def buildInfo
 def rtMaven
     
 def call(){
-		
-		server = Artifactory.server 'jenkins-artifactory-server'
-
-        rtMaven = Artifactory.newMavenBuild()
-        rtMaven.tool = 'MAVEN'// Tool name from Jenkins configuration
-        rtMaven.deployer releaseRepo: 'sample-repo', snapshotRepo: 'sample-repo-snapshot', server: server
-        rtMaven.resolver releaseRepo: 'sample-repo', snapshotRepo: 'sample-repo-snapshot', server: server
-        rtMaven.deployer.deployArtifacts = false // Disable artifacts deployment during Maven run
-
-        buildInfo = Artifactory.newBuildInfo()
-		
-		rtMaven.run pom: 'pom.xml', goals: 'install', buildInfo: buildInfo
-		
-		rtMaven.deployer.deployArtifacts buildInfo
-		
-		server.publishBuildInfo buildInfo	
-
+	
+	rtServer (id: "jenkins-artifactory-server",  url: 'http://localhost:8081/artifactory',
+                    username: 'admin',
+					password: 'password'
+                )
+                rtMavenDeployer (
+                    id: "deployer-unique-id",
+                    serverId: "jenkins-artifactory-server",
+                    releaseRepo: "sample-repo",
+                    snapshotRepo: "sample-repo",
+                    deployArtifacts:"true"
+                )
+                rtMavenResolver (
+                    id: "resolver-unique-id",
+                    serverId: "jenkins-artifactory-server",
+                    releaseRepo: "sample-repo",
+                    snapshotRepo: "sample-repo"
+                )
+				rtUpload(
+					serverId: "jenkins-artifactory-server",
+					pattern: "*roshambo*.jar",
+					target: "/sample-repo/"
+				)
+				rtPublishBuildInfo(
+					serverId: "jenkins-artifactory-server",
+				)	
+	
 }
