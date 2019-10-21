@@ -12,13 +12,9 @@ node('master'){
 	stage('checkout')
 	{
 		
-            git {
-                remote {
-                    url('https://github.com/cameronmcnz/rock-paper-scissors.git')
-                }
-                branch("*/master")
-            
-        }	
+	git branch: 'master',
+    	url: 'https://github.com/cameronmcnz/rock-paper-scissors.git'
+            	
 	}	
 	stage('Develop-Merge-Release'){
 		steps{
