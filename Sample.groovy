@@ -8,7 +8,7 @@ node('master'){
 		choiceParam('DESTINATION_BRANCH', ['Master', 'Release'], 'Destination branch where the code should be merged')
 		stringParam('RELEASE_BRANCH', '')
 	}
-		
+	stages{	
 	stage('checkout')
 	{
 		
@@ -43,6 +43,7 @@ node('master'){
 		}
 	}
 	stage('Release-to-artifactory'){
-		//Git_Flow()
+		Git_Flow()
+	}
 	}
 }
