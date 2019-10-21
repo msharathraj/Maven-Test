@@ -2,7 +2,7 @@ def server
 def buildInfo
 def rtMaven
     
-def call(String depReleaseRepo,String depSnapshot,String resReleaseRepo,String resSnapshot){
+def call(){
 		
 	rtServer (id: "jenkins-artifactory-server",  url: 'http://localhost:8081/artifactory',
 				username: 'admin', password: 'password'
