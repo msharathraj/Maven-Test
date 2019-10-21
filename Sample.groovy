@@ -2,7 +2,7 @@
 
 //@Library('Artifactory-Publish') _
 
-node
+job('sada')
  {
 		parameters {
 			choiceParam('SOURCE_BRANCH', ['Master', 'Develop'], 'Source branch from code is merged to Destination')
