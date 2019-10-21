@@ -1,12 +1,3 @@
-node {
-
-	stage('Preparation') {
-		println 'sadd'	
-	}	
-	
-	
-	stage('Pdreparation') {
-		println 'ssdaadd'	
-	}	
-	
+job('example-1') {
+    deliveryPipelineConfiguration('qa')
 }
