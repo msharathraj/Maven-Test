@@ -1,30 +1,36 @@
+#!/usr/bin/env groovy
 
-@Library('Maven-Test@test') _
-
-pipeline {
-	agent any
-	tools{
-		maven 'MAVEN'
+pipeline
+ {
+		agent any
+		parameters {
+			choiceParam('SOURCE_BRANCH', ['Master', 'Develop'], 'Source branch from code is merged to Destination')
+			choiceParam('DESTINATION_BRANCH', ['Master', 'Release'], 'Destination branch where the code should be merged')
+			stringParam('RELEASE_BRANCH', '')
+		}
+		
+		stages {
+		stage('checkout')
+		{
+			steps{	
+				git  url : 'https://stash.intralinks.com/scm/qe/qe-pom.git', credentialsId: 'git'
+			}	
+		}	
+			stage('Develop-Merge-Release'){
+			steps{
+			// This stage is going to merge the code from develop to release branch and runs maven to check build
+								}
+			}
+			stage('Release-Merge-Master'){
+			// This stage is going to merge the code from develop to release branch and runs maven to check build
+			steps{
+			
+				
+				}
+			}
+			
+			stage('Release-to-artifactory'){
+				//Git_Flow()
+			}
+		}
 	}
-    stages {
-        stage ('Clone') {
-            steps {
-                git branch: 'dragon', url: "https://github.com/cameronmcnz/rock-paper-scissors.git"
-				bat 'git checkout master'
-				bat 'mvn install'
-            }
-        }
-		
-        stage ('Artifactory configuration') {
-            steps {
-                
-                Git_Flow()
-                
-                }
-        }
-		
-        
-
-        
-    }
-}
