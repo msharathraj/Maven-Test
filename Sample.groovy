@@ -2,7 +2,7 @@
 
 //@Library('Artifactory-Publish') _
 
-pipeline
+node
  {
 		parameters {
 			choiceParam('SOURCE_BRANCH', ['Master', 'Develop'], 'Source branch from code is merged to Destination')
@@ -10,7 +10,6 @@ pipeline
 			stringParam('RELEASE_BRANCH', '')
 		}
 		
-		stages {
 		stage('checkout')
 		{
 			steps{	
@@ -34,5 +33,5 @@ pipeline
 			stage('Release-to-artifactory'){
 				//Git_Flow()
 			}
-		}
+		
 	}
