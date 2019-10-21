@@ -1,14 +1,12 @@
-pipelineJob('sadad-master') {
-
-    definition {
-
-        cps {
-           println 'asdad'
-            script(readFileFromWorkspace('Maven-Test/Jenkinsfile'))
-            sandbox()
-            
-        }
-
+node {  
+    stage('Build') { 
+        // 
+        bat "echo build"
     }
-
+    stage('Test') { 
+        // 
+    }
+    stage('Deploy') { 
+        // 
+    }
 }
