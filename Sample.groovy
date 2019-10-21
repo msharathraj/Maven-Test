@@ -1,4 +1,4 @@
-node {
+node('sads') {
     // Get Artifactory server instance, defined in the Artifactory Plugin administration page.
     def server = Artifactory.server "jenkins-artifactory-server"
     // Create an Artifactory Maven instance.
