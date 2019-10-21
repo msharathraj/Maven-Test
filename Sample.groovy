@@ -1,4 +1,4 @@
-pipelineJob('job-dsl-artifactory-pipeline-example') {
+node('master') {
 
     parameters {
 
