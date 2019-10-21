@@ -2,9 +2,13 @@
 
 try{
 node('sadasd-1'){
-    steps{
-     println 'sdada'   
-    }
+    stages{
+        stage('test'){
+            steps{
+             bat 'echo sample test'
+            }
+        }  
+    }    
 }
 }catch (Exception e){
     
