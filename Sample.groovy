@@ -1,11 +1,12 @@
-def test
-pipeline{
+node('master') {
+
+	stage('Preparation') {
+		println 'sadd'	
+	}	
 	
-	stages{
-		stage('sadd'){
-			
-			println 'asd'
-		}
-	}
+	
+	stage('Pdreparation') {
+		println 'ssdaadd'	
+	}	
 	
 }
