@@ -11,24 +11,5 @@ node {
 	    git url: 'https://github.com/cameronmcnz/rock-paper-scissors.git' 
         	
 	}	
-	stage('Develop-Merge-Release'){
-		// This stage is going to merge the code from develop to release branch and runs maven to check build
-			bat('''
-			git branch 
-			echo "Merging the code from Develop Branch to Release Branch"
-            	''')
-		
-	}
-	stage('Release-Merge-Master'){
-		// This stage is going to merge the code from develop to release branch and runs maven to check build
-			bat('''
-			git branch 
-			echo "Merging the code from Master Branch to Release Branch"
-        		
-			''')
-		
-	}
-	stage('Release-to-artifactory'){
-		Git_Flow()
-	}
+	
 }
