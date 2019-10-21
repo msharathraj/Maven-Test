@@ -1,5 +1,3 @@
-#!/usr/bin/env groovy
-
 pipeline
  {
 		agent any
@@ -9,28 +7,23 @@ pipeline
 			stringParam('RELEASE_BRANCH', '')
 		}
 		
+		
+			
 		stages {
-		stage('checkout')
-		{
-			steps{	
+        stage('Build') { 
+            steps{	
 				git  url : 'https://stash.intralinks.com/scm/qe/qe-pom.git', credentialsId: 'git'
 			}	
-		}	
-			stage('Develop-Merge-Release'){
-			steps{
-			// This stage is going to merge the code from develop to release branch and runs maven to check build
-								}
-			}
-			stage('Release-Merge-Master'){
-			// This stage is going to merge the code from develop to release branch and runs maven to check build
-			steps{
-			
-				
-				}
-			}
-			
-			stage('Release-to-artifactory'){
-				//Git_Flow()
-			}
-		}
+        }
+        stage('Test'){
+            steps {
+                println 'test'
+            }
+        }
+        stage('Deploy') {
+            
+        }
+    }
+		
+		
 	}
