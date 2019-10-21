@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-@Library('Artifactory-Publish') _
+@Library('Maven-Test@test') _
 
 pipeline{
 	parameters {
@@ -47,6 +47,6 @@ pipeline{
 		}
 	}
 	stage('Release-to-artifactory'){
-		//Git_Flow()
+		Git_Flow()
 	}
 }
