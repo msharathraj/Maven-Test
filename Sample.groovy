@@ -1,24 +1,30 @@
-import jenkins.model.*
-import org.jfrog.*
-import org.jfrog.hudson.*
 
-def inst = Jenkins.getInstance()
+@Library('Maven-Test@test') _
 
-def desc = inst.getDescriptor("org.jfrog.hudson.ArtifactoryBuilder")
+pipeline {
+	agent any
+	tools{
+		maven 'MAVEN'
+	}
+    stages {
+        stage ('Clone') {
+            steps {
+                git branch: 'dragon', url: "https://github.com/cameronmcnz/rock-paper-scissors.git"
+				bat 'git checkout master'
+				bat 'mvn install'
+            }
+        }
+		
+        stage ('Artifactory configuration') {
+            steps {
+                
+                Git_Flow()
+                
+                }
+        }
+		
+        
 
-def deployerCredentials = new CredentialsConfig("admin", "password", "")
-def resolverCredentials = new CredentialsConfig("", "", "")
-
-def sinst = [new ArtifactoryServer(
-  "main",
-  "http://localhost:8081/artifactory",
-  deployerCredentials,
-  resolverCredentials,
-  300,
-  false,
-  3 )
-]
-
-desc.setArtifactoryServers(sinst)
-
-desc.save()
+        
+    }
+}
