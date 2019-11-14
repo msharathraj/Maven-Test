@@ -1,6 +1,6 @@
 @Library('Maven-Test@test') _
 
-job("Releae-Project") {
+pieplinejob("Releae-Project") {
         description("This is release process job")
         label('master')
         keepDependencies(false)
