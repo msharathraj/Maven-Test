@@ -9,11 +9,7 @@ job("Releae-Project") {
             stringParam("SOURCE_BRANCH", "qe", "The GIT branch to checkout.")
         }
 	scm {
-            git {
-                remote {
-                    github("https://github.com/msharathraj/Maven-Test.git")
-                }
-            }
+            git("https://github.com/msharathraj/Maven-Test.git")
         }	
         
         disabled(false)
