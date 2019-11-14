@@ -1,3 +1,4 @@
+@Library('Maven-Test@test') _
 
 job("Releae-Project") {
         description("This is release process job")
