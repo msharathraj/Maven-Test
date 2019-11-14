@@ -14,11 +14,7 @@ job("Releae-Project") {
         
         disabled(false)
         concurrentBuild(false)
-        steps {
-	Git_Flow()	
-            
-        }
-        
+        Git_Flow()	
         publishers {
             extendedEmail {
                 triggers {
