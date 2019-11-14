@@ -15,7 +15,8 @@ job("Releae-Project") {
         disabled(false)
         concurrentBuild(false)
         steps {
-            shell("echo git branch")
+	Git_Flow()	
+            
         }
         
         publishers {
