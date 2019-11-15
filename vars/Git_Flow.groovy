@@ -4,7 +4,7 @@ def rtMaven
 def descriptor
 
     
-def call(){
+def test(){
 	
 	def server = Artifactory.server 'jenkins-artifactory-server'
 	def descriptor = Artifactory.mavenDescriptor()
